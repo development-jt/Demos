@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Parameter Table Demo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    body { font-family: Arial, sans-serif; margin: 2em; }
+    table { border-collapse: collapse; margin-top: 1em; }
+    td, th { border: 1px solid #ccc; padding: 0.5em 1em; }
+    th { background: #f4f4f4; }
+  </style>
+</head>
+<body>
+  <h1>URL Parameter Table</h1>
+  <table>
+    <thead>
+      <tr>
+        <th>Parameter</th>
+        <th>Value</th>
+      </tr>
+    </thead>
+    <tbody id="param-table">
+      <!-- Filled by JavaScript -->
+    </tbody>
+  </table>
+  <script>
+    function getParams() {
+      const params = new URLSearchParams(window.location.search);
+      return [
+        { name: "param1", value: params.get("param1") || "" },
+        { name: "param2", value: params.get("param2") || "" },
+        { name: "param3", value: params.get("param3") || "" }
+      ];
+    }
+
+    function renderTable() {
+      const table = document.getElementById('param-table');
+      const params = getParams();
+      table.innerHTML = params.map(p => 
+        `<tr><td>${p.name}</td><td>${p.value}</td></tr>`
+      ).join('');
+    }
+
+    renderTable();
+  </script>
+</body>
+</html>
